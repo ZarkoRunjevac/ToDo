@@ -9,10 +9,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import com.zarkorunjevac.codepathtodo.model.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rvItems;
+
+   private AppDatabase mDb;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
             .setAction("Action", null).show();
       }
     });
+
+    mDb = AppDatabase.getInMemoryDatabase(getApplicationContext());
 
     rvItems=(RecyclerView)findViewById(R.id.rvItems);
 

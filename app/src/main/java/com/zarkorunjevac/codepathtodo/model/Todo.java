@@ -1,16 +1,32 @@
 package com.zarkorunjevac.codepathtodo.model;
 
-import java.util.Date;
+import static android.R.attr.name;
 
+import android.arch.persistence.room.Entity;
+import java.util.Date;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 /**
  * Created by zarko.runjevac on 8/2/2017.
  */
-
+@Entity
 public class Todo {
 
-  public Todo(String name){
+
+
+  public Todo(String name, Date dueDate,
+              String note, int priority,
+              int status){
+    mId=0;
     mName=name;
+    mDueDate=dueDate;
+    mTaskNotes=note;
+    mPriorityLevel=priority;
+    mStatus=status;
   }
+
+  @PrimaryKey(autoGenerate = true)
+  private int mId;
 
   private String mName;
 
@@ -18,9 +34,9 @@ public class Todo {
 
   private String mTaskNotes;
 
-  private String mPriorityLevel;
+  private int mPriorityLevel;
 
-  private String mStatus;
+  private int mStatus;
 
   public String getName() {
     return mName;
@@ -46,19 +62,19 @@ public class Todo {
     this.mTaskNotes = mTaskNotes;
   }
 
-  public String getPriorityLevel() {
+  public int getPriorityLevel() {
     return mPriorityLevel;
   }
 
-  public void setPriorityLevel(String mPriorityLevel) {
+  public void setPriorityLevel(int mPriorityLevel) {
     this.mPriorityLevel = mPriorityLevel;
   }
 
-  public String getStatus() {
+  public int getStatus() {
     return mStatus;
   }
 
-  public void setStatus(String mStatus) {
+  public void setStatus(int mStatus) {
     this.mStatus = mStatus;
   }
 }
