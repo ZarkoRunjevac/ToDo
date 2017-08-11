@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <data>
+    <variable name="todo"
+      type="com.zarkorunjevac.codepathtodo.db.entity.Todo"/>
+    <variable name="callback"
+      type="com.zarkorunjevac.codepathtodo.ui.TodoClickCallback"/>
+  </data>
+<TextView
+  android:id="@+id/todo_name"
+  android:padding="16dp"
+  android:text="@{todo.name}"
+  android:onClick="@{() ->  callback.onClick(todo)}"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+</TextView>
+  </layout>
