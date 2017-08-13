@@ -4,19 +4,23 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.zarkorunjevac.codepathtodo.R;
 import com.zarkorunjevac.codepathtodo.databinding.TodoItemBinding;
 import com.zarkorunjevac.codepathtodo.db.entity.Todo;
+import com.zarkorunjevac.codepathtodo.ui.touchHelper.ItemTouchHelperAdapter;
+
 import java.util.List;
+
 
 /**
  * Created by zarko.runjevac on 8/2/2017.
  */
 
-public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsViewHolder> {
+public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsViewHolder> implements ItemTouchHelperAdapter {
 
 
 
@@ -24,9 +28,13 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsViewHolder> 
 
   @Nullable
   private final TodoClickCallback mTodoClickCallback;
+  @Nullable
+  private final TodoDeleteCallback mTodoDeleteCallback;
 
-  public TodoItemsAdapter(@Nullable TodoClickCallback todoClickCallback){
+  public TodoItemsAdapter(@Nullable TodoClickCallback todoClickCallback,
+                          @Nullable TodoDeleteCallback todoDeleteCallback){
     mTodoClickCallback=todoClickCallback;
+    mTodoDeleteCallback=todoDeleteCallback;
   }
 
   public void setTodoList(final List<? extends Todo> todoList){
@@ -54,9 +62,14 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsViewHolder> 
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
           Todo todo=todoList.get(newItemPosition);
-          Todo old=todoList.get(oldItemPosition);
+          Todo old=mTodoList.get(oldItemPosition);
 
-          return todo.getId() ==old.getId();
+          return todo.getId() ==old.getId()
+                  && todo.getName()==old.getName()
+                  && todo.getDueDate()==old.getDueDate()
+                  && todo.getTaskNotes()==old.getTaskNotes()
+                  && todo.getPriorityLevel()==old.getPriorityLevel()
+                  && todo.getStatus()==old.getStatus();
 
 
         }
@@ -69,8 +82,7 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsViewHolder> 
 
   @Override
   public TodoItemsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//    View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.todo_item,parent,false);
-//    view.setOnClickListener(mTodoClickCallback);
+
 
     TodoItemBinding binding= DataBindingUtil
         .inflate(LayoutInflater.from(parent.getContext()),R.layout.todo_item,
@@ -92,5 +104,16 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsViewHolder> 
   }
 
 
+  @Override
+  public boolean onItemMove(int fromPosition, int toPosition) {
+    return false;
+  }
 
+  @Override
+  public void onItemDismiss(int position) {
+    //mTodoDeleteCallback(mTodoList.get(position));
+    mTodoDeleteCallback.onDelete(mTodoList.get(position));
+//    mTodoList.remove(position);
+//    notifyItemRemoved(position);
+  }
 }

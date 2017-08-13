@@ -53,4 +53,16 @@ public class TodoListViewModel extends AndroidViewModel{
     return mObservableTodos;
   }
 
+  public void deleteTodo(final Todo todo){
+    final DatabaseCreator databaseCreator = DatabaseCreator.getInstance(this.getApplication());
+    Runnable saveRunnable=new Runnable() {
+      @Override
+      public void run() {
+        databaseCreator.getDatabase().todoModel().deleteTodo(todo.getId());
+      }
+    };
+    new Thread(saveRunnable).start();
+
+  }
+
 }

@@ -11,7 +11,9 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Todo  {
 
-  public Todo(){}
+  public Todo(){
+    setId(0);
+  }
 
   public Todo(String name, Date dueDate,
               String note, int priority,

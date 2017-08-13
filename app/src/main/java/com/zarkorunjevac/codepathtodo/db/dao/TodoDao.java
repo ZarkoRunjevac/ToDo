@@ -36,4 +36,7 @@ public interface TodoDao {
 
   @Query("DELETE FROM Todo WHERE Todo.mid=:id")
   void deleteTodo(int id);
+
+  @Query("SELECT * FROM Todo WHERE Todo.mid=:todoId")
+  LiveData<Todo> loadTodo(int todoId);
 }
