@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,8 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.zarkorunjevac.codepathtodo.databinding.FragmentTodoListBinding;
 import com.zarkorunjevac.codepathtodo.db.entity.Todo;
-import com.zarkorunjevac.codepathtodo.dummy.DummyContent;
-import com.zarkorunjevac.codepathtodo.dummy.DummyContent.DummyItem;
+
 
 import com.zarkorunjevac.codepathtodo.ui.TodoClickCallback;
 import com.zarkorunjevac.codepathtodo.ui.TodoDeleteCallback;
@@ -65,7 +65,13 @@ public class TodoListFragment extends LifecycleFragment implements OnStartDragLi
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     final TodoListViewModel viewModel= ViewModelProviders.of(this).get(TodoListViewModel.class);
-
+    FloatingActionButton fab = (FloatingActionButton) mBinding.fab;
+    fab.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startActivity(new Intent(getActivity(), TodoItemActivity.class).putExtra(TodoItemActivity.KEY_TODO_ID,0));
+      }
+    });
     subscribeToViewModel(viewModel);
   }
 

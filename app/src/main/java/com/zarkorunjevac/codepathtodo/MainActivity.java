@@ -21,12 +21,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-  private RecyclerView rvItems;
-  private TodoItemsAdapter mTodoItemsAdapter;
-
-
-
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -39,14 +33,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//    setSupportActionBar(toolbar);
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        startActivity(new Intent(MainActivity.this, TodoItemActivity.class).putExtra(TodoItemActivity.KEY_TODO_ID,0));
-      }
-    });
  }
 }
