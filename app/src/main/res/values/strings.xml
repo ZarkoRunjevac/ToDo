@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">CodePathToDo</string>
+  <string name="app_name">Todo App</string>
   <string name="action_settings">Settings</string>
 
   <string name="todo_dialog_caption">Task</string>
@@ -30,8 +30,8 @@
   </string-array>
 
   <string-array name="todo_status_array">
-    <item>@string/todo_status_complete</item>
     <item>@string/todo_status_incomplete</item>
+    <item>@string/todo_status_complete</item>
   </string-array>
 
 </resources>

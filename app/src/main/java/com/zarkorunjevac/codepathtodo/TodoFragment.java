@@ -36,15 +36,9 @@ public class TodoFragment extends LifecycleFragment {
   public static final String TAG="TodoViewModel";
   private static final String KEY_TODO_ID = "todo_id";
 
-
   private Todo mTodo;
 
-
-
   private FragmentTodoBinding mBinding;
-
-
-
 
   @Nullable
   @Override
@@ -77,8 +71,6 @@ public class TodoFragment extends LifecycleFragment {
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ButterKnife.bind(getActivity());
-
-
    }
 
 
@@ -86,7 +78,6 @@ public class TodoFragment extends LifecycleFragment {
   @Override
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-
 
 
     TodoViewModel.Factory factory=new TodoViewModel.Factory(
@@ -105,6 +96,11 @@ public class TodoFragment extends LifecycleFragment {
       @Override
       public void onChanged(@Nullable Todo todo) {
         mTodo=todo;
+        if(null!=mTodo){
+          Calendar calendar=Calendar.getInstance();
+          calendar.setTime(mTodo.getDueDate());
+          mBinding.dpDueDate.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), Calendar.DATE);
+        }
         model.setTodo(todo);
       }
     });
@@ -118,6 +114,7 @@ public class TodoFragment extends LifecycleFragment {
 
     return fragment;
   }
+
 
   private void getTodoValues(){
     if (mTodo==null) mTodo=new Todo();
