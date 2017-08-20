@@ -1,148 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-  <data>
-    <variable name="todoViewModel" type="com.zarkorunjevac.codepathtodo.viewmodel.TodoViewModel"/>
-  </data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-  <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <FrameLayout
-      android:id="@+id/content"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:layout_marginTop="16dp"
-    android:orientation="vertical">
+    <data>
+
+        <variable
+            name="todoViewModel"
+            type="com.zarkorunjevac.codepathtodo.viewmodel.TodoViewModel" />
+    </data>
 
     <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
-
-      <EditText
-        android:id="@+id/txtTodoName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:hint="@string/todo_name_label"
-        android:text="@{todoViewModel.todo.getName()}" />
-      <EditText
-        android:id="@+id/txtTodoNotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:hint="@string/todo_notes_label"
-        android:inputType="textMultiLine"
-        android:lines="3"
-        android:text="@{todoViewModel.todo.getTaskNotes()}" />
+        android:background="?android:windowBackground"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?colorPrimary">
+
+            <TextView
+                android:id="@+id/category_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?colorPrimary"
+                android:gravity="center_vertical"
+                android:minHeight="?actionBarSize"
+                android:paddingBottom="4dp"
+                android:paddingLeft="72dp"
+                android:paddingStart="72dp"
+                android:paddingTop="4dp"
+                android:text="@string/todo_dialog_caption"
+                android:textAppearance="@style/Todo.TextAppearance.Title"
+
+                tools:ignore="UnusedAttribute,NewApi,RtlSymmetry,PrivateResource" />
+
+            <ImageButton
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:background="@drawable/selector_subtle"
+                android:padding="16dp"
+                android:src="@drawable/arrow_back"
+                android:tint="?android:textColorPrimary" />
+
+        </FrameLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:minHeight="?android:attr/actionBarSize"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:transitionGroup="true"
+                            tools:ignore="UnusedAttribute,NewApi">
+
+                            <EditText
+                                android:id="@+id/txtTodoName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/todo_name_label"
+                                android:imeOptions="actionDone"
+                                android:inputType="textCapWords"
+                                android:text="@{todoViewModel.todo.getName()}"
+                                android:textColor="@color/text_dark" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:minHeight="?android:attr/actionBarSize"
+                            android:transitionGroup="true"
+                            tools:ignore="UnusedAttribute,NewApi">
+
+                            <EditText
+                                android:id="@+id/txtTodoNotes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="bottom"
+                                android:hint="@string/todo_notes_label"
+                                android:imeOptions="actionDone"
+                                android:inputType="textMultiLine"
+                                android:lines="3"
+                                android:text="@{todoViewModel.todo.getTaskNotes()}"
+                                android:textColor="@color/text_dark" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="16dp">
+
+                        <TextView
+                            android:id="@+id/dueDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:elevation="4dp"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="16dp"
+                            android:paddingStart="16dp"
+                            android:text="@string/todo_due_date_label"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/text_dark" />
+
+                        <DatePicker
+                            android:id="@+id/dpDueDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:calendarViewShown="false"
+                            android:datePickerMode="spinner"
+                            android:paddingEnd="16dp"
+                            android:paddingLeft="0dp"
+                            android:paddingStart="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/priority"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:elevation="4dp"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="16dp"
+                            android:paddingStart="16dp"
+                            android:text="@string/todo_priority_level_label"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/text_dark" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/spnPriority"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/todo_priority_array"
+                            android:gravity="right|end"
+                            android:selectedItemPosition="@{todoViewModel.todo.getPriorityLevel()}"
+                            android:textAlignment="textEnd" />
+
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="16dp">
+
+                        <TextView
+                            android:id="@+id/status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:elevation="4dp"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="16dp"
+                            android:paddingStart="16dp"
+                            android:text="@string/todo_status_label"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/text_dark" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/spnStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/todo_status_array"
+
+                            android:gravity="right|end"
+                            android:selectedItemPosition="@{todoViewModel.todo.getStatus()}"
+                            android:textAlignment="textEnd" />
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="16dp">
+
+                        <Button
+                            android:id="@+id/btnSave"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="16dp"
+                            android:background="@color/colorPrimaryDark"
+                            android:gravity="center"
+                            android:paddingBottom="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/todo_button_save"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                            android:textColor="@color/text_dark" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </ScrollView>
 
     </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:paddingTop="16dp"
-    android:orientation="vertical">
-
-      <TextView
-        android:id="@+id/dueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:clipToPadding="false"
-        android:elevation="4dp"
-        android:gravity="center_vertical"
-        android:text="@string/todo_due_date_label" />
-
-      <DatePicker
-        android:id="@+id/dpDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingLeft="0dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
-
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal">
-      <TextView
-        android:id="@+id/priority"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:clipToPadding="false"
-        android:elevation="4dp"
-        android:gravity="center_vertical"
-        android:text="@string/todo_priority_level_label" />
-      <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/spnPriority"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/todo_priority_array"
-        android:gravity="right|end"
-        android:selectedItemPosition="@{todoViewModel.todo.getPriorityLevel()}"
-        android:textAlignment="textEnd" />
-
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:paddingTop="16dp"
-      android:orientation="horizontal">
-      <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:clipToPadding="false"
-        android:elevation="4dp"
-        android:gravity="center_vertical"
-        android:text="@string/todo_status_label" />
-      <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/spnStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/todo_status_array"
-        android:gravity="right|end"
-        android:selectedItemPosition="@{todoViewModel.todo.getStatus()}"
-        android:textAlignment="textEnd" />
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:paddingTop="16dp"
-      android:orientation="vertical">
-
-      <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="@string/todo_button_save" />
-
-    </LinearLayout>
-    </LinearLayout>
-    </FrameLayout>
-  </ScrollView>
-
-
-  </layout>
+</layout>

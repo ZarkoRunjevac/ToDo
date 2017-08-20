@@ -47,6 +47,14 @@ public class TodoFragment extends LifecycleFragment {
     mBinding= DataBindingUtil.inflate(inflater,R.layout.fragment_todo,container,false);
 
     Button button=mBinding.btnSave;
+
+    mBinding.back.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        ((TodoItemActivity) getActivity()).onBackPressed();
+      }
+    });
+
     button.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

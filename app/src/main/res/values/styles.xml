@@ -1,16 +1,21 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:textColorPrimary">@color/text_dark</item>
+    <item name="android:textColor">@color/text_dark</item>
+    <item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorPrimaryDark</item>
+    <item name="android:windowBackground">@color/yellowBackground</item>
   </style>
 
 
-  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="Todo.TextAppearance.Title" parent="TextAppearance.AppCompat.Title">
+    <item name="android:textColor">@color/text_dark</item>
+  </style>
 
-  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
