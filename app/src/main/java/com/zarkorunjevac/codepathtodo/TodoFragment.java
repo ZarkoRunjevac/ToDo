@@ -9,6 +9,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatSpinner;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import com.zarkorunjevac.codepathtodo.db.AppDatabase;
 import com.zarkorunjevac.codepathtodo.db.DatabaseCreator;
 import com.zarkorunjevac.codepathtodo.db.entity.Todo;
 import com.zarkorunjevac.codepathtodo.ui.TodoItemActivity;
+import com.zarkorunjevac.codepathtodo.utils.DataInputHelper;
 import com.zarkorunjevac.codepathtodo.viewmodel.TodoViewModel;
 
 import java.util.Calendar;
@@ -73,6 +76,13 @@ public class TodoFragment extends LifecycleFragment {
 
     return mBinding.getRoot();
 
+  }
+
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+
+    initContenViews(view);
   }
 
   @Override
@@ -139,6 +149,31 @@ public class TodoFragment extends LifecycleFragment {
     mTodo.setPriorityLevel(mBinding.spnPriority.getSelectedItemPosition());
 
     mTodo.setStatus(mBinding.spnStatus.getSelectedItemPosition());
+  }
+
+  private boolean isInputDataValid(){
+    return DataInputHelper.isInputDataValid(mBinding.txtTodoName.getText());
+  }
+
+  private void initContenViews(View view){
+    TextWatcher textWatcher=new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+      }
+
+      @Override
+      public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+        if(s.length()==0) mBinding.btnSave.setEnabled(false);
+      }
+
+      @Override
+      public void afterTextChanged(Editable editable) {
+          if(isInputDataValid()) mBinding.btnSave.setEnabled(true);
+      }
+    };
+
+    mBinding.txtTodoName.addTextChangedListener(textWatcher);
   }
 
 
