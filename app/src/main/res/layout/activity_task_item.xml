@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zarkorunjevac.codepathtodo.ui.TodoItemActivity">
+    tools:context="com.zarkorunjevac.codepathtodo.ui.activity.TodoItemActivity">
 
   <FrameLayout
     android:id="@+id/fragment_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
 
     android:orientation="vertical"
     app:layout_constraintBottom_toBottomOf="parent"

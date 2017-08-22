@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:background="?android:windowBackground"
         android:orientation="vertical"
-        tools:context="com.zarkorunjevac.codepathtodo.MainActivity">
+        tools:context="com.zarkorunjevac.codepathtodo.ui.activity.MainActivity">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

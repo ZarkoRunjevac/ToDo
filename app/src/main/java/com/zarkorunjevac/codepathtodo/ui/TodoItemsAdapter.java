@@ -4,13 +4,13 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import com.zarkorunjevac.codepathtodo.R;
 import com.zarkorunjevac.codepathtodo.databinding.TodoItemBinding;
 import com.zarkorunjevac.codepathtodo.db.entity.Todo;
+import com.zarkorunjevac.codepathtodo.ui.callback.TodoClickCallback;
+import com.zarkorunjevac.codepathtodo.ui.callback.TodoDeleteCallback;
 import com.zarkorunjevac.codepathtodo.ui.touchHelper.ItemTouchHelperAdapter;
 
 import java.util.List;
